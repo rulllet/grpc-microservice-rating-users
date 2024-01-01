@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package grpc;
+
+message RatingTopRequest {
+}
+
+message RatingUserRequest {
+    int32  id = 1;
+}
+
+message ChangeNicknameRequest {
+    int32  id = 1;
+    string nick = 2;
+}
+
+message ChangeStatusRequest {
+    int32  id = 1;
+}
+
+message RatingUserResponse {
+    int32 user_id = 1;
+    string nickname = 2;
+    int32 total_correct = 3;
+    int32 total_wrong = 4;
+}
+
+message RatingTopResponse {
+    repeated RatingUserResponse top_users = 1;
+  }
+
+service RatingServicer {
+    rpc RatingUser (RatingUserRequest) returns (RatingUserResponse);
+    rpc RatingTop (RatingTopRequest) returns (RatingTopResponse);
+    rpc InitRating (RatingUserRequest) returns (ChangeStatusRequest);
+    rpc UpdateCorrect (RatingUserRequest) returns (ChangeStatusRequest);
+    rpc UpdateWrong (RatingUserRequest) returns (ChangeStatusRequest);
+    rpc ChangeNickname (ChangeNicknameRequest) returns (ChangeStatusRequest);
+    rpc DeleteUser (RatingUserRequest) returns (ChangeStatusRequest);
+}

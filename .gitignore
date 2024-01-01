@@ -1,0 +1,7 @@
+.env
+__pycache__
+commands.txt
+rating_pb2.py
+rating_pb2.pyi
+rating_pb2_grpc.py
+rating.db
